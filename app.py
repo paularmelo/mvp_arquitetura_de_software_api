@@ -14,31 +14,37 @@ app = OpenAPI(__name__, info=info)
 CORS(app)
 
 # definindo tags
-home_tag = Tag(name="Documentação",
-               description="Seleção de documentação: Swagger, Redoc ou RapiDoc")
+home_tag = Tag(
+    name="Documentação",
+    description="Seleção de documentação: Swagger, Redoc ou RapiDoc",
+)
 receita_tag = Tag(
-    name="Receita", description="Adição, visualização e remoção de receitas culinárias")
+    name="Receita", description="Adição, visualização e remoção de receitas culinárias"
+)
 ingredientes_tag = Tag(
-    name="Ingredientes", description="Adição de ingredientes a receitas inserida a base")
+    name="Ingredientes", description="Adição de ingredientes a receitas inserida a base"
+)
 
 
-@app.get('/', tags=[home_tag])
+@app.get("/", tags=[home_tag])
 def home():
-    """Redireciona para /openapi, tela que permite a escolha do estilo de documentação.
-    """
-    return redirect('/openapi')
+    """Redireciona para /openapi, tela que permite a escolha do estilo de documentação."""
+    return redirect("/openapi")
 
 
-@app.post('/receita', tags=[receita_tag],
-          responses={"200": ReceitaViewSchema, "409": ErrorSchema, "400": ErrorSchema})
+@app.post(
+    "/receita",
+    tags=[receita_tag],
+    responses={"200": ReceitaViewSchema, "409": ErrorSchema, "400": ErrorSchema},
+)
 def add_receita(form: ReceitaSchema):
-    """Adiciona uma nova receita à base de dados
-    """
+    """Adiciona uma nova receita à base de dados"""
     receita = Receita(
         titulo=form.titulo,
         status=form.status,
         preparo=form.preparo,
-        categoria=form.categoria)
+        categoria=form.categoria,
+    )
 
     logger.debug(f"Adicionando receita de nome: '{receita.titulo}'")
     try:
@@ -55,23 +61,23 @@ def add_receita(form: ReceitaSchema):
     except IntegrityError as e:
         # como a duplicidade do nome é a provável razão do IntegrityError
         error_msg = "Receita de mesmo titulo já salvo na base :/"
-        logger.warning(
-            f"Erro ao adicionar receita'{receita.titulo}', {error_msg}")
+        logger.warning(f"Erro ao adicionar receita'{receita.titulo}', {error_msg}")
         return {"mesage": error_msg}, 409
 
     except Exception as e:
         # caso um erro fora do previsto
         error_msg = "Não foi possível salvar novo item :/"
-        logger.warning(
-            f"Erro ao adicionar produto '{receita.titulo}', {error_msg}")
+        logger.warning(f"Erro ao adicionar produto '{receita.titulo}', {error_msg}")
         return {"mesage": error_msg}, 400
 
 
-@app.put('/receita', tags=[receita_tag],
-         responses={"200": ReceitaViewSchema, "409": ErrorSchema, "400": ErrorSchema})
+@app.put(
+    "/receita",
+    tags=[receita_tag],
+    responses={"200": ReceitaViewSchema, "409": ErrorSchema, "400": ErrorSchema},
+)
 def update_receita(form: ReceitaSchema):
-    """Adiciona uma nova receita à base de dados
-    """
+    """Adiciona uma nova receita à base de dados"""
     logger.info(f"titulo: '{form.titulo}'")
     logger.info(f"status: '{form.status}'")
     logger.info(f"preparo: '{form.preparo}'")
@@ -82,14 +88,12 @@ def update_receita(form: ReceitaSchema):
     # criando conexão com a base
     session = Session()
     # fazendo a busca
-    receita = session.query(Receita).filter(
-        Receita.titulo == receita_titulo).first()
+    receita = session.query(Receita).filter(Receita.titulo == receita_titulo).first()
 
     if not receita:
         # se o produto não foi encontrado
         error_msg = "Receita não encontrado na base :/"
-        logger.warning(
-            f"Erro ao buscar receita '{receita_titulo}', {error_msg}")
+        logger.warning(f"Erro ao buscar receita '{receita_titulo}', {error_msg}")
         return {"mesage": error_msg}, 404
     else:
         logger.info(f"Receita econtrado: '{receita.titulo}'")
@@ -104,8 +108,11 @@ def update_receita(form: ReceitaSchema):
         # return apresenta_ingredientes(ingredientes), 200
 
 
-@app.get('/receitas', tags=[receita_tag],
-         responses={"200": ListagemReceitasSchema, "404": ErrorSchema})
+@app.get(
+    "/receitas",
+    tags=[receita_tag],
+    responses={"200": ListagemReceitasSchema, "404": ErrorSchema},
+)
 def get_receitas():
     """Faz a busca por todas as receitas cadastradas
 
@@ -127,8 +134,11 @@ def get_receitas():
         return apresenta_receitas(receitas), 200
 
 
-@app.get('/receita', tags=[receita_tag],
-         responses={"200": ReceitaViewSchema, "404": ErrorSchema})
+@app.get(
+    "/receita",
+    tags=[receita_tag],
+    responses={"200": ReceitaViewSchema, "404": ErrorSchema},
+)
 def get_receita(query: ReceitaBuscaSchema):
     """Faz a busca por uma Receita a partir do título informado. O id é utilizado internamente para buscar os ingredientes
 
@@ -142,28 +152,30 @@ def get_receita(query: ReceitaBuscaSchema):
     # criando conexão com a base
     session = Session()
     # fazendo a busca
-    receita = session.query(Receita).filter(
-        Receita.titulo == receita_titulo).first()
+    receita = session.query(Receita).filter(Receita.titulo == receita_titulo).first()
 
     ingredientes = session.query(Ingredientes).filter(
-        Ingredientes.receita == receita_id)
+        Ingredientes.receita == receita_id
+    )
 
     if not receita:
         # se o produto não foi encontrado
         error_msg = "Receita não encontrado na base :/"
-        logger.warning(
-            f"Erro ao buscar receita '{receita_titulo}', {error_msg}")
+        logger.warning(f"Erro ao buscar receita '{receita_titulo}', {error_msg}")
         return {"mesage": error_msg}, 404
     else:
         logger.debug(f"Receita econtrado: '{receita.titulo}'")
         logger.debug(f"Ingredientes econtrado: '{ingredientes}'")
         # retorna a representação de produto
         return apresenta_receita(receita), 200
-       # return apresenta_ingredientes(ingredientes), 200
+    # return apresenta_ingredientes(ingredientes), 200
 
 
-@ app.delete('/receita', tags=[receita_tag],
-             responses={"200": ReceitaDelSchema, "404": ErrorSchema})
+@app.delete(
+    "/receita",
+    tags=[receita_tag],
+    responses={"200": ReceitaDelSchema, "404": ErrorSchema},
+)
 def del_receita(query: ReceitaBuscaSchema):
     """Deleta uma Receita a partir do título informado
 
@@ -176,8 +188,7 @@ def del_receita(query: ReceitaBuscaSchema):
     # criando conexão com a base
     session = Session()
     # fazendo a remoção
-    count = session.query(Receita).filter(
-        Receita.titulo == receita_nome).delete()
+    count = session.query(Receita).filter(Receita.titulo == receita_nome).delete()
 
     session.commit()
 
@@ -188,15 +199,17 @@ def del_receita(query: ReceitaBuscaSchema):
     else:
         # se o produto não foi encontrado
         error_msg = "Receita não encontrado na base :/"
-        logger.warning(
-            f"Erro ao deletar receita #'{receita_nome}', {error_msg}")
+        logger.warning(f"Erro ao deletar receita #'{receita_nome}', {error_msg}")
         return {"mesage": error_msg}, 404
 
 
-@ app.delete('/ingrediente', tags=[receita_tag],
-             responses={"200": IngredientesDelSchema, "404": ErrorSchema})
+@app.delete(
+    "/ingrediente",
+    tags=[receita_tag],
+    responses={"200": IngredientesDelSchema, "404": ErrorSchema},
+)
 def del_ingrediente(query: IngredienteBuscaSchema):
-    """Deleta uma Receita a partir do título informado
+    """Deleta um Ingrediente a partir da descrição(nome) informado e ID da receita que ele pertence.
 
     Retorna uma mensagem de confirmação da remoção.
     """
@@ -204,15 +217,19 @@ def del_ingrediente(query: IngredienteBuscaSchema):
     receita_id = unquote(unquote(query.receita))
 
     print(ingrediente_descricao)
-    logger.debug(
-        f"Deletando dados sobre ingredientes #{ingrediente_descricao}")
+    logger.debug(f"Deletando dados sobre ingredientes #{ingrediente_descricao}")
     # criando conexão com a base
     session = Session()
 
     # fazendo a remoção
-    count = session.query(Ingredientes).filter(
-        Ingredientes.descricao == ingrediente_descricao and
-        Ingredientes.receita == receita_id).delete()
+    count = (
+        session.query(Ingredientes)
+        .filter(
+            Ingredientes.descricao == ingrediente_descricao
+            and Ingredientes.receita == receita_id
+        )
+        .delete()
+    )
 
     logger.info(f"Ingrediente #{ingrediente_descricao}")
 
@@ -226,25 +243,30 @@ def del_ingrediente(query: IngredienteBuscaSchema):
         # se o produto não foi encontrado
         error_msg = "Ingrediente não encontrado na base :/"
         logger.warning(
-            f"Erro ao deletar ingrediente #'{ingrediente_descricao}', {error_msg}")
+            f"Erro ao deletar ingrediente #'{ingrediente_descricao}', {error_msg}"
+        )
         return {"mesage": error_msg}, 404
 
 
-@app.post('/ingrediente', tags=[ingredientes_tag],
-          responses={"200": IngredientesViewSchema, "404": ErrorSchema})
+@app.post(
+    "/ingrediente",
+    tags=[ingredientes_tag],
+    responses={"200": IngredientesViewSchema, "404": ErrorSchema},
+)
 def add_ingrediente(form: IngredientesSchema):
     """Adiciona novo ingrediente a receita cadastrada na base identificado pelo id
 
     Retorna uma representação das receitas e ingredientes associados.
     """
 
-    ingredientes = Ingredientes(descricao=form.descricao,
-                                quantidade=form.quantidade,
-                                unidade_medida=form.unidade_medida,
-                                receita=form.receita_id)
+    ingredientes = Ingredientes(
+        descricao=form.descricao,
+        quantidade=form.quantidade,
+        unidade_medida=form.unidade_medida,
+        receita=form.receita_id,
+    )
 
-    logger.debug(
-        f"Adicionando ingrediente de nome: '{ingredientes.descricao}'")
+    logger.debug(f"Adicionando ingrediente de nome: '{ingredientes.descricao}'")
     try:
         # criando conexão com a base
         session = Session()
@@ -253,20 +275,19 @@ def add_ingrediente(form: IngredientesSchema):
         # efetivando o camando de adição de novo item na tabela
         session.commit()
 
-        logger.debug(
-            f"Adicionado ingrediente de nome: '{ingredientes.descricao}'")
+        logger.debug(f"Adicionado ingrediente de nome: '{ingredientes.descricao}'")
         return apresenta_ingredientes(ingredientes), 200
 
     except IntegrityError as e:
         # como a duplicidade do nome é a provável razão do IntegrityError
         error_msg = "Receita de mesmo titulo já salvo na base :/"
-        logger.warning(
-            f"Erro ao adicionar receita'{ingredientes.titulo}', {error_msg}")
+        logger.warning(f"Erro ao adicionar receita'{ingredientes.titulo}', {error_msg}")
         return {"mesage": error_msg}, 409
 
     except Exception as e:
         # caso um erro fora do previsto
         error_msg = "Não foi possível salvar novo item :/"
         logger.warning(
-            f"Erro ao adicionar produto '{ingredientes.descricao}', {error_msg}")
+            f"Erro ao adicionar produto '{ingredientes.descricao}', {error_msg}"
+        )
         return {"mesage": error_msg}, 400

@@ -18,7 +18,7 @@ pydantic==1.10.2
 pyrsistent==0.18.1
 pytz==2022.2.1
 six==1.16.0
-SQLAlchemy==1.4.41
+SQLAlchemy==2.0.16
 SQLAlchemy-Utils==0.38.3
 typing_extensions==4.3.0
 Werkzeug==2.1.2

@@ -31,3 +31,7 @@
 [2023-09-16 02:12:36,560] INFO _log() L224  127.0.0.1 - - [16/Sep/2023 02:12:36] "GET /receitas HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L224 
 [2023-09-16 02:23:09,140] INFO _log() L224  127.0.0.1 - - [16/Sep/2023 02:23:09] "GET /receitas HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L224 
 [2023-09-16 02:24:01,970] INFO _log() L224  127.0.0.1 - - [16/Sep/2023 02:24:01] "GET /receitas HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L224 
+[2023-09-27 17:52:47,092] INFO _log() L224   * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.5.250:5000 (Press CTRL+C to quit) - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L224 
