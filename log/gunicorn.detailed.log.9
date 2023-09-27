@@ -1,0 +1,81 @@
+[2023-05-03 21:18:38,963] ERROR log_exception() L1741 Exception on /receita [DELETE] - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py L1741
+Traceback (most recent call last):
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_cors\extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_openapi3\scaffold.py", line 104, in view_func
+    response = func(**result)
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Paula\Documents\CURSOS\Pos Eng Software\Sprint 1\Projetos\mvp_receitas_paula\meu_app_api\app.py", line 136, in del_receita
+    receita_id = unquote(unquote(query.id))
+                         ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\urllib\parse.py", line 645, in unquote
+    if '%' not in string:
+       ^^^^^^^^^^^^^^^^^
+TypeError: argument of type 'int' is not iterable
+[2023-05-03 21:18:38,997] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:18:38] "[35m[1mDELETE /receita?titulo=Bolo%20de%20Chocolate HTTP/1.1[0m" 500 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:21:03,709] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:21:03] "GET /receitas HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:21:08,279] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:21:08] "OPTIONS /receita?titulo=Bolo%20de%20Chocolate HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:21:08,282] ERROR log_exception() L1741 Exception on /receita [DELETE] - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py L1741
+Traceback (most recent call last):
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_cors\extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_openapi3\scaffold.py", line 104, in view_func
+    response = func(**result)
+               ^^^^^^^^^^^^^^
+  File "C:\Users\Paula\Documents\CURSOS\Pos Eng Software\Sprint 1\Projetos\mvp_receitas_paula\meu_app_api\app.py", line 136, in del_receita
+  File "C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\urllib\parse.py", line 645, in unquote
+    if '%' not in string:
+       ^^^^^^^^^^^^^^^^^
+TypeError: argument of type 'int' is not iterable
+[2023-05-03 21:21:08,289] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:21:08] "[35m[1mDELETE /receita?titulo=Bolo%20de%20Chocolate HTTP/1.1[0m" 500 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:21:55,394] INFO _log() L186  [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.5.249:5000 - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:21:55,394] INFO _log() L186  [33mPress CTRL+C to quit[0m - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:22:13,096] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:22:13] "GET /receitas HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:22:18,257] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:22:18] "OPTIONS /receita?titulo=Bolo%20de%20Chocolate HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:22:18,297] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:22:18] "DELETE /receita?titulo=Bolo%20de%20Chocolate HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:32:05,194] INFO _log() L186  [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.5.249:5000 - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:32:05,194] INFO _log() L186  [33mPress CTRL+C to quit[0m - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:32:14,490] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:32:14] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:32:14,600] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:32:14] "[36mGET /openapi/static/css/swagger-ui.css HTTP/1.1[0m" 304 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:32:14,602] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:32:14] "[36mGET /openapi/static/js/swagger-ui-bundle.js HTTP/1.1[0m" 304 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:32:14,603] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:32:14] "[36mGET /openapi/static/js/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:32:14,753] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:32:14] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:32:14,756] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:32:14] "[36mGET /openapi/static/images/swagger.svg HTTP/1.1[0m" 304 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:33:28,497] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:33:28] "GET /receitas HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:34:34,280] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:34:34] "POST /receita HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:34:35,902] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:34:35] "POST /ingrediente HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:34:35,911] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:34:35] "POST /ingrediente HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:34:35,927] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:34:35] "POST /ingrediente HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
+[2023-05-03 21:35:11,325] INFO _log() L186  127.0.0.1 - - [03/May/2023 21:35:11] "GET /receitas HTTP/1.1" 200 - - call_trace=C:\Users\Paula\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py L186 
